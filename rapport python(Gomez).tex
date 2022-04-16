@@ -131,4 +131,11 @@ L'algorithme de Shor est un algorithme conçu par Peter Shor en 1994, qui factor
 L'implémentation de cet algorithme dans un calculateur quantique pratique causerait la vulnérabilité de beaucoup de cryptosystèmes à clé publique, tel que le système de chiffrement RSA.
 
 \subsection{Construction du script pour factoriser un entier naturel non nul en facteurs premiers}
+La construction de l'algorithme est en théorie précédée d'une partie quantique qui permet de trouver un entier $a$ tel que $a^r \equiv 1 \pmod N$, n'ayant pas accès à une machine nous permettant de faire de l'informatique quantique, on se contentera d'un programme en admettant que l'on a trouvé cet entier $a$.
+
+D'après les propriétés pour lesquelles on a trouvé $a$, on a donc :
+$$a^r \equiv 1 \pmod N$$
+Par conséquent, $N \mid (a^r -1)$. Supposons à présent qu'il soit possible de déterminer r, et que celui-ci est pair. Alors
+\\
+$a^r -1 = (a^{\frac{r}{2}} -1)(a^{\frac{r}{2}}+1) \equiv 0 \pmod N$, d'où $N \mid (a^{\frac{r}{2}} -1)(a^{\frac{r}{2}}+1)$
 \end{document}
