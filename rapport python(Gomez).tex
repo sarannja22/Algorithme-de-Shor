@@ -1,0 +1,133 @@
+\documentclass[12pt]{article}
+
+\usepackage{latexsym} % in order to use \Box
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{shadow}
+\usepackage{multicol}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{wrapfig}
+\usepackage[greek,frenchb]{babel}% pour avoir date et table des matières en FR
+\usepackage{marvosym}%\EUR
+\usepackage[T1]{fontenc}
+\usepackage{enumerate}
+\usepackage{xcolor}%pour utiliser \textcolor{red}{...}
+\usepackage{pythonhighlight}
+
+
+
+\textwidth=14cm
+
+
+
+
+\begin{document}
+
+\title{\bf Rapport sur le projet}
+\author{Rémi GOMEZ${}^\ast$ et Sarannja CLARUS\footnote{\'Etudiants en L2-Mathématiques pour l'année universitaire 2021-2022}}
+\date{\today}
+\maketitle
+
+
+\begin{figure}[h]
+	\includegraphics[scale=0.2]{C:/Users/remig/OneDrive/Bureau/logo_endossement_rvb}
+	\centering
+\end{figure}
+\tableofcontents
+
+
+
+\newpage
+
+
+\section{Fonction indicatrice d'Euler et présentation du chiffrement RSA}
+\subsection{Présentation de la fonction}
+En mathématiques, l'indicatrice d'Euler est une fonction arithmétique de la théorie des nombres, qui à tout entier naturel n non nul associe le nombre d'entiers compris entre 1 et n (inclus) et premiers avec n.
+On peut voir ci-dessous un graphe et un tableau qui recensent la valeur de cette fonction pour différents nombres naturels donnés : (Wikipédia)
+\\
+\\
+\begin{figure}[h]
+    \begin{minipage}[c]{.46\linewidth}
+        \centering
+        \includegraphics[scale=0.6]{C:/Users/remig/OneDrive/Bureau/tableau euler}
+        \caption{Tableau de l'indicatrice d'Euler}
+    \end{minipage}
+    \hfill%
+    \begin{minipage}[c]{.46\linewidth}
+        \centering
+        \includegraphics[scale=0.5]{C:/Users/remig/OneDrive/Bureau/nuage de point euler}
+        \caption{Nuage de point de l'indicatrice d'Euler}
+    \end{minipage}
+\end{figure}
+\newpage
+\subsection{Construction de l'indicatrice d'Euler sur python}
+Pour construire un algorithme permettant d'afficher les valeurs de l'indicatrice d'Euler, on a d'abord construit un algorithme permettant d'obtenir la valeur de l'indicatrice pour une valeur donnée :
+\begin{python}
+import numpy as np
+import math
+import matplotlib.pyplot as plt
+
+def euler(n):
+    phi=np.array([])
+    for i in range(1,n+1):
+        if (math.gcd(n,i)==1):
+            phi=np.append(phi,i)
+    return len(phi)
+\end{python}
+
+On a ensuite construit une fonction qui nous renvoie un nuage de point afin de se rendre compte de l'évolution de l'indicatrice d'Euler :
+\begin{python}
+import numpy as np
+import math
+import matplotlib.pyplot as plt
+
+
+
+def euler(n):
+    phi=np.array([])
+    for i in range(1,n+1):
+        if (math.gcd(n,i)==1):
+            phi=np.append(phi,i)
+    return len(phi)
+
+x=np.arange(0,101)
+y=np.array([])
+
+
+for k in range(1,102):
+    phi=[]
+    y=np.append(y,euler(k))
+
+
+plt.scatter(x, y, color="red", s=5)
+plt.xlim(0,101)
+plt.ylim(0,101)
+plt.show()
+\end{python}
+On obtient alors le même nuage de point que celui vu dans la première sous partie :
+
+\begin{figure}[h]
+	\includegraphics[scale=0.5]{C:/Users/remig/OneDrive/Bureau/indic euler py}
+	\centering
+	\caption{Nuage de point de l'indicatrice d'Euler sur python}
+\end{figure}
+\subsection{Présentation du chiffrement RSA}
+Le chiffrement RSA (nommé par les initiales de ses trois inventeurs) est un algorithme de cryptographie asymétrique, très utilisé dans le commerce électronique, et plus généralement pour échanger des données confidentielles sur Internet. Cet algorithme a été décrit en 1977 par Ronald Rivest, Adi Shamir et Leonard Adleman. RSA a été breveté par le Massachusetts Institute of Technology (MIT) en 1983 aux États-Unis. Le brevet a expiré le 21 septembre 2000.
+\\
+\\
+Le système du chiffrement RSA est basé sur l'association de deux clés, une clé publique et une clé privée, toutes deux créées par une même personne qui est souvent nommée par convention "Alice", qui souhaite que des données confidentielles lui soient envoyées. Alice rend la clé publique accessible, afin que ces destinataires puissent l'utiliser, on appelle souvent par convention le destinataire "Bob". La clé publique est utilisée par les destinataires afin de chiffrer leurs données confidentielles. La clé privée, quant à elle, permet à Alice de déchiffrer les données reçues.
+Une condition indispensable pour assurer le fonctionnement du chiffrement RSA est que les données confidentielles, une fois chiffrées, ne puissent être "calculatoirement" déchiffrables à l'aide de la seule clé publique. Plus particulièrement, il doit être "calculatoirement impossible" de reconstituer la clé privée à partir de la clé publique, autrement dit, que les calculs disponibles et les méthodes connues (le temps que les données doivent rester secrètes) ne doivent pas le permettre.
+\\
+\\
+\\
+Le système de chiffrement RSA a donc un lien avec l'algorithme de Shor. En effet, pour "casser" le chiffrement RSA, il serait nécessaire de connaître ou trouver la factorisation du nombre n en le produit initial des nombres p et q sur la base de la connaissance de n uniquement. Plus la clé choisie est longue, plus le temps de la factorisation croît, et ce de manière exponentielle. Le système de chiffrement RSA est prometteur car jusqu'à présent, il n'existe pas d'algorithme connu dans la communauté scientifique pour craquer le chiffrement "RSA" sur un ordinateur classique.
+\section{L'algorithme de Shor}
+\subsection{Présentation de l'algorithme de Shor}
+L'algorithme de Shor est un algorithme conçu par Peter Shor en 1994, qui factorise un entier naturel N en temps $O(log N)^3)$ et en espace $O(log N)$.
+
+\subsection{Construction du script pour factoriser un entier naturel non nul en facteurs premiers}
+\end{document}
