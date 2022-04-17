@@ -46,7 +46,8 @@
 
 \section{Fonction indicatrice d'Euler et présentation du chiffrement RSA}
 \subsection{Présentation de la fonction}
-En mathématiques, l'indicatrice d'Euler est une fonction arithmétique de la théorie des nombres, qui à tout entier naturel n non nul associe le nombre d'entiers compris entre 1 et n (inclus) et premiers avec n.
+La fonction indicatrice d'Euler est une fonction arithmétique de la théorie des nombres qui, à tout entier naturel n non nul, associe le nombre d'entiers compris entre 1 et n (inclus) premiers avec n.
+\\
 On peut voir ci-dessous un graphe et un tableau qui recensent la valeur de cette fonction pour différents nombres naturels donnés : (Wikipédia)
 \\
 \\
@@ -140,4 +141,8 @@ Par conséquent, $N \mid (a^r -1)$. Supposons à présent qu'il soit possible de
 $a^r -1 = (a^{\frac{r}{2}} -1)(a^{\frac{r}{2}}+1) \equiv 0 \pmod N$, d'où $N \mid (a^{\frac{r}{2}} -1)(a^{\frac{r}{2}}+1)$
 \\
 $r$ est le plus petit entier positif tel que $N$ divise $(a^r -1)$, donc N ne peut pas diviser $(a^{\frac{r}{2}}-1)$. Si $N$ ne divise pas non plus $(a^{\frac{r}{2}}+1)$, alors $N$ doit avoir un facteur commun non trivial avec chacun des $(a^{\frac{r}{2}}-1)$ et $(a^{\frac{r}{2}}+1)$.
+\\
+Preuve : notons $(a^{\frac{r}{2}}-1)$ et $(a^{\frac{r}{2}}+1)$ u et v respectivement. $N \mid uv$, donc $kN=uv$ pour un certain entier k. Supposons que PGCD$(u, N)=1$, alors $mu +nN=1$ pour certains entiers m et n (identité de Bézout). En multipliant de part et d'autre par v, on trouve que $mkN + nvN=v$, donc $N \mid v$. Par contradiction, PGCD$(u, N)\neq 1$. Par un argument similaire, PGCD$(v, N) \neq 1$.
+\\
+Ceci fournit une factorisation de $N$. Si $N$ est le produit de deux nombres premiers, elle est la \textit{seule} factorisation possible.
 \end{document}
