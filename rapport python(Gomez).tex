@@ -51,6 +51,8 @@ La fonction indicatrice d'Euler est une fonction arithmétique de la théorie de
 On peut voir ci-dessous un graphe et un tableau qui recensent la valeur de cette fonction pour différents nombres naturels donnés : (Wikipédia)
 \\
 \\
+\\
+\\
 \begin{figure}[h]
     \begin{minipage}[c]{.46\linewidth}
         \centering
@@ -132,7 +134,26 @@ L'algorithme de Shor est un algorithme conçu par Peter Shor en 1994, qui factor
 L'implémentation de cet algorithme dans un calculateur quantique pratique causerait la vulnérabilité de beaucoup de cryptosystèmes à clé publique, tel que le système de chiffrement RSA.
 
 \subsection{Construction du script pour factoriser un entier naturel non nul en facteurs premiers}
-La construction de l'algorithme est en théorie précédée d'une partie quantique qui permet de trouver un entier $a$ tel que $a^r \equiv 1 \pmod N$, n'ayant pas accès à une machine nous permettant de faire de l'informatique quantique, on se contentera d'un programme en admettant que l'on a trouvé cet entier $a$.
+On ne traitera ici que la partie classique de l'algorithme.
+\\
+La première étape consiste à choisir un nombre pseudo-aléatoire $a<n$.
+\\
+La deuxième étape consiste à calculer PGCD$(a, N)$. Cette étape peut être effectué à l'aide de l'algorithme d'Euclide.
+\\
+La troisième étape consiste à vérifier si PGCD$(a, N)\neq 1$, si tel est le cas, alors $a$ est un facteur non trivial de $N$, ce qui donne une solution au problème. Si tel n'est pas le cas, alors on passe à l'étape 4.
+\\
+La quatrième étape consiste à utiliser le sous-programme de rechercher de période (qu'on ne détaillera ni n'expliquera car c'est une partie qui utilise de l'informatique quantique) pour trouver r, qui est la période de la fonction $f:x \mapsto a^x \pmod N$, soit le plus petit entier $r$ pour lequel $f(x+r)=f(x)$.
+\\
+La cinquième étape consiste à vérifier si $r$ est impair. Si tel est le cas, on retourne à l'étape 1, sinon, on passe à l'étape 6.
+\\
+La sixième étape consiste à vérifier si $a^{\frac{r}{2}} \equiv -1 \pmod N$, si tel est le cas, on retourne à l'étape 1, sinon on passe à la septième étape.
+\\
+Septième et dernière étape, les facteurs de $N$ sont PGCD$(a^{\frac{r}{2}} \pm 1, N)$, ce qui résout le problème. 
+\\
+Voyons à présent comment obtenir des facteurs à partir de la période.
+Cette partie nécessite d'utiliser un algorithme fonctionnant avec de l'informatique quantique, qui nous permettrait de déterminer un entier $a$ appartenant au groupe $(\textbf{Z}/N\textbf{Z})^x$. Ce groupe étant fini, $a$ possède (théorème d'Euler) un ordre fini $r$, défini comme le plus petit entier positif tel que : 
+\\
+$a^r \equiv 1 \pmod N$.
 
 D'après les propriétés pour lesquelles on a trouvé $a$, on a donc :
 $$a^r \equiv 1 \pmod N$$
