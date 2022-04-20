@@ -130,8 +130,16 @@ Une condition indispensable pour assurer le fonctionnement du chiffrement RSA es
 Le système de chiffrement RSA a donc un lien avec l'algorithme de Shor. En effet, pour "casser" le chiffrement RSA, il serait nécessaire de connaître ou trouver la factorisation du nombre n en le produit initial des nombres p et q sur la base de la connaissance de n uniquement. Plus la clé choisie est longue, plus le temps de la factorisation croît, et ce de manière exponentielle. Le système de chiffrement RSA est prometteur car jusqu'à présent, il n'existe pas d'algorithme connu dans la communauté scientifique pour craquer le chiffrement "RSA" sur un ordinateur classique.
 \section{L'algorithme de Shor}
 \subsection{Présentation de l'algorithme de Shor}
-L'algorithme de Shor est un algorithme conçu par Peter Shor en 1994, qui factorise un entier naturel N en temps $O(log N)^3)$ et en espace $O(log N)$.
-L'implémentation de cet algorithme dans un calculateur quantique pratique causerait la vulnérabilité de beaucoup de cryptosystèmes à clé publique, tel que le système de chiffrement RSA.
+L'algorithme de Shor est un algorithme quantique conçu par Peter Shor en 1994, qui factorise un entier naturel N en temps $O(log N)^3)$ et en espace $O(log N)$.
+L'implémentation de cet algorithme dans un calculateur quantique pratique causerait la vulnérabilité de beaucoup de cryptosystèmes à clé publique, tel que le système de chiffrement RSA. Notons donc qu'un message chiffré par le RSA peut être déchiffré par la factorisation de sa clé publique (produit de deux nombres entiers) en utilisant l'algorithme de Shor. Ce procédé vise à chercher un entier p compris entre 2 et $\sqrt{N}$. Actuellement, il n'y a pas d'algorithme capable de décrypter un message utilisant la cryptographie asymétrique en un temps $O(log N)^k)$ avec n'importe quel k. Les algorithmes classiques deviennent alors rapidemment inexécutable dès lors que N augmente contrairement à la méthode de Peter Shor.
+\\
+Aujourd'hui, on est capable, avec les algorithmes connus et les supercalculateurs de factoriser des nombres ayant environ 250 chiffres, au delà de 500 chiffres, cette factorisation devient impossible. Pour s'imaginer la situation actuelle, les meilleurs algorithmes auraient besoin de plusieurs millions d'années pour factoriser un nombre à 600 chiffres alors qu'un ordinateur quantique ne mettrait que quelques minutes. Des tests ont été réalisé sur des ordinateurs quantiques et en 2001, une société multinationale américaine (IBM) utilisa l'algorithme de Shor afin de factoriser 15 en 3 et 5. Puis en 2012, une équipe a réussi à factoriser 21 en 3 et 7, c'est le record du plus grand nombre factorisé par un dispositif quantique. En 2019, le nombre 35 a été testé mais se fut un échec en raison d'une accumulation d'erreur.
+\\
+En ce qui concerne le procédé, l'algorithme de Shor consiste en deux éléments:
+
+1-Sur un ordinateur quantique, effectuer une réduction du problème de factorisation en un problème de recherche d'ordre (partie classique).
+
+2-Sur un ordinateur quantique, résoudre le problème de recherche d'ordre (partie quantique).
 
 \subsection{Construction du script pour factoriser un entier naturel non nul en facteurs premiers}
 On ne traitera ici que la partie classique de l'algorithme.
